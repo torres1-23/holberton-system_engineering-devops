@@ -1,2 +1,2 @@
 #!/bin/bash
-printf "%o\n" "$(($((5#30012412301))+$((5#12421231313))))" | tr 01234567 behlnort
+printf "%o\n" "$(($((5#"tr 01234 water"))+$((5#"tr 01234 stir."))))" | tr 01234567 behlnort
