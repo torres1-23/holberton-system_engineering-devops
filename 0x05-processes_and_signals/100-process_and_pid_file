@@ -5,7 +5,8 @@
 # Displays I hate the kill command when receiving a SIGTERM signal
 # Displays Y U no love me?! when receiving a SIGINT signal
 # Deletes the file /var/run/holbertonscript.pid and terminates itself when receiving a SIGQUIT or SIGTERM signal
-function del_term() {
+function del_term()
+{
     rm -rf /var/run/holbertonscript.pid
     exit
 }
@@ -14,6 +15,7 @@ echo $$ > /var/run/holbertonscript.pid
 while :
 do
     echo "To infinity and beyond"
+    sleep 2
     trap 'echo "I hate the kill command" && del_term' SIGTERM
     trap 'echo "Y U no love me?!"' SIGINT
     trap 'del_term' SIGQUIT
