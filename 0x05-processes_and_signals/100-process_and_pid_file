@@ -15,7 +15,6 @@ echo $$ > /var/run/holbertonscript.pid
 while :
 do
     echo "To infinity and beyond"
-    sleep 2
     trap 'echo "I hate the kill command" && del_term' SIGTERM
     trap 'echo "Y U no love me?!"' SIGINT
     trap 'del_term' SIGQUIT
