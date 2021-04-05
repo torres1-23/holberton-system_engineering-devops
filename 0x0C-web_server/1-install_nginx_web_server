@@ -6,7 +6,7 @@ echo "Holberton School" > /var/www/html/index.html
 echo "#Config file for NGINX server.
 
 server {
-	listen 80 default_server;
+    listen 80 default_server;
     listen [::]:80 default_server;
     root /var/www/html;
     index index.html index.htm;
