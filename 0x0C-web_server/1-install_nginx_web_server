@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Bash script that configures a new Ubuntu machine with Nginx on it.
-sudo apt-get update
-sudo apt-get install -y nginx
+apt-get update
+apt-get install -y nginx
 echo "Holberton School" > /var/www/html/index.html
 echo "#Config file for NGINX server.
 
@@ -11,4 +11,4 @@ server {
     root /var/www/html;
     index index.html index.htm;
 }" > /etc/nginx/sites-available/default
-sudo systemctl reload nginx
+systemctl reload nginx
