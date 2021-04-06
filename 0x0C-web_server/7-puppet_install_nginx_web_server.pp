@@ -13,12 +13,13 @@ file { '/var/www/html/index.html':
 file_line { '/etc/nginx/sites-available/default':
   ensure  => present,
   after   => 'listen 80 default_server;',
-  line   => '        rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;'
+  line    => '        rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;'
 }
 
 service { 'nginx':
   ensure     => running,
   enable     => true,
+  hasrestart => true,
   require    => Package['nginx'],
   subscribe  => File_line['/etc/nginx/sites-available/default']
 }
