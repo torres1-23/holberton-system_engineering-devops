@@ -32,6 +32,6 @@ file { 'Create custom config file':
 }
 
 exec { 'Restart nginx':
-    command => 'systemctl restart nginx',
+    command => 'service nginx restart',
     path    => '/usr/bin/:/usr/local/bin/:/bin/'
 }
