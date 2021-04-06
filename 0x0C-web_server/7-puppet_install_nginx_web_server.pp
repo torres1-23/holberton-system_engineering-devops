@@ -34,7 +34,17 @@ service { 'nginx':
 file { 'Create config file':
   ensure  => present,
   path    => '/etc/nginx/sites-available/default',
-  notify  => Service['nginx'],
-  require => Package['nginx'],
   content => $string
+}
+
+service { 'nginx':
+  ensure  => stopped,
+  enable  => true,
+  require => Package['nginx']
+}
+
+service { 'nginx':
+  ensure  => enabled,
+  enable  => true,
+  require => Package['nginx']
 }
