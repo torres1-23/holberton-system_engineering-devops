@@ -28,12 +28,12 @@ file { 'Create index.html':
 service { 'nginx':
   ensure  => running,
   enable  => true,
-  hasrestart => true,
   require => Package['nginx']
 }
 
-file { '/etc/nginx/sites-available/default':
+file { 'Create config file':
   ensure  => present,
+  path    => '/etc/nginx/sites-available/default',
   notify  => Service['nginx'],
   require => Package['nginx'],
   content => $string
