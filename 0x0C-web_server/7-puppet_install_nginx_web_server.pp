@@ -31,9 +31,7 @@ file { 'Create custom config file':
   content => $string
 }
 
-service { 'nginx':
-  ensure     => stopped,
-  enable     => true,
-  hasrestart => true,
-  require    => Package['nginx']
+exec { 'Restart nginx':
+    command => 'systemctl restart nginx',
+    path    => '/usr/bin/:/usr/local/bin/:/bin/'
 }
