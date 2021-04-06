@@ -19,6 +19,12 @@ package { 'Install nginx':
   provider => 'apt'
 }
 
+service { 'nginx':
+  ensure  => 'running',
+  enable  => true,
+  require => Package['nginx'],
+}
+
 file { 'Create index.html':
   ensure  => present,
   path    => '/var/www/html/index.html',
@@ -26,10 +32,12 @@ file { 'Create index.html':
 }
 
 file { 'Configuration file conf':
-  ensure  => present
-  owner   => 'ubutnu',
+  ensure  => present,
+  notify  => Service['nginx'],
+  owner   => 'ubuntu',
   group   => 'ubuntu',
-  mode    => '0744',
+  mode    => '0600',
   path    => '/etc/nginx/sites-available/default',
+  require => Package['nginx'],
   content => $string
 }
