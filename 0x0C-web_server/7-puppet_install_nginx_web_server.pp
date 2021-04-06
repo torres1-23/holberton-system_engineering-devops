@@ -25,19 +25,18 @@ file { 'Create index.html':
   content => 'Holberton School'
 }
 
-file { 'Configuration file conf':
-  ensure  => present,
-  notify  => Service['nginx'],
-  path    => '/etc/nginx/sites-available/default',
-  owner   => 'root',
-  group   => 'root',
-  mode    => '0600',
-  require => Package['nginx'],
-  content => $string
-}
-
 service { 'nginx':
   ensure  => 'running',
   enable  => true,
   require => Package['nginx'],
+}
+
+file { '/etc/nginx/sites-available/default':
+  ensure  => present,
+  notify  => Service['nginx'],
+  owner   => 'root',
+  group   => 'root',
+  mode    => '0764',
+  require => Package['nginx'],
+  content => $string
 }
