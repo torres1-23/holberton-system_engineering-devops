@@ -25,13 +25,18 @@ file { 'Create index.html':
   content => 'Holberton School'
 }
 
-file { 'Create custom config file':
-  ensure  => present,
-  path    => '/etc/nginx/sites-available/default',
-  content => $string
+service { 'nginx':
+  ensure  => 'running',
+  enable  => true,
+  require => Package['nginx'],
 }
 
-exec { 'Restart nginx':
-    command => 'service nginx restart',
-    path    => '/usr/bin/:/usr/local/bin/:/bin/'
+file { '/etc/nginx/nginx.conf':
+  notify  => Service['nginx'],
+  mode    => '0600',
+  owner   => 'nginx',
+  group   => 'nginx',
+  require => Package['nginx'],
+  path    => '/etc/nginx/sites-available/default',
+  content => $string
 }
