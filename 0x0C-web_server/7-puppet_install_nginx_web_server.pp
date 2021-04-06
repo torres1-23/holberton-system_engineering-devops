@@ -14,15 +14,21 @@ server {\
 }"
 
 package { 'nginx':
-  provider => 'apt',
+  ensure   => present,
+  provider => 'apt'
 }
 
 file { '/var/www/html/index.html':
-  content => 'Holberton School',
+  ensure  => present,
+  content => 'Holberton School'
 }
 
 file { '/etc/nginx/sites-available/default':
-  content => $string,
+  ensure  => present,
+  owner   => 'nginx',
+  group   => 'nginx',
+  mode    => '0600',
+  content => $string
 }
 
 service { 'nginx':
@@ -30,5 +36,5 @@ service { 'nginx':
   enable     => true,
   hasrestart => true,
   require    => Package['nginx'],
-  subscribe  => File['/etc/nginx/sites-available/default'],
+  subscribe  => File['/etc/nginx/sites-available/default']
 }
