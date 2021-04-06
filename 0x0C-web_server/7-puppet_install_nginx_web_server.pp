@@ -38,12 +38,6 @@ file { 'Create config file':
 }
 
 service { 'nginx':
-  ensure  => stopped,
-  enable  => true,
-  require => Package['nginx']
-}
-
-service { 'nginx':
   ensure     => running,
   enable     => true,
   hasrestart => true,
