@@ -1,4 +1,4 @@
-# Manifest to configure an Ubuntu server with nginx.
+# Manifest to configure an Ubuntu server with nginx
 
 package { 'nginx':
   ensure   => present,
@@ -12,10 +12,8 @@ file { '/var/www/html/index.html':
 
 file_line { '/etc/nginx/sites-available/default':
   ensure  => present,
-  after  => 'listen 80 default_server;',
-  line   => "location /redirect_me {\
-        return 301 https://www.youtube.com/watch?v=dQw4w9WgXcQ;\
-}"
+  after   => 'listen 80 default_server;',
+  line    => '    return ^/redirect_me 301 https://www.youtube.com/watch?v=dQw4w9WgXcQ;'
 }
 
 service { 'nginx':
