@@ -1,0 +1,2 @@
+# Script that debugs a docker container not running server apache.
+service apache2 start
