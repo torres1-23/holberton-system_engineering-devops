@@ -13,21 +13,18 @@ server {\
     }\
 }"
 
-package { 'Install nginx':
-  ensure   => present,
-  name     => 'nginx',
-  provider => 'apt'
+package { 'nginx':
+  provider => 'apt',
 }
 
-file { 'Create index.html':
+file { '/var/www/html/index.html':
   ensure  => present,
-  path    => '/var/www/html/index.html',
-  content => 'Holberton School'
+  content => 'Holberton School',
 }
 
 file { '/etc/nginx/sites-available/default':
   ensure  => present,
-  content => $string
+  content => $string,
 }
 
 service { 'nginx':
@@ -35,5 +32,5 @@ service { 'nginx':
   enable     => true,
   hasrestart => true,
   require    => Package['nginx'],
-  subscribe  => File['/etc/nginx/sites-available/default']
+  subscribe  => File['/etc/nginx/sites-available/default'],
 }
