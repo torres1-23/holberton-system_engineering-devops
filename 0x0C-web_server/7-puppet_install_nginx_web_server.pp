@@ -32,9 +32,6 @@ file { 'Create custom config file':
 }
 
 service { 'nginx':
-  ensure     => running,
-  enable     => true,
-  hasrestart => true,
-  require    => Package['nginx'],
-  subscribe  => File['Create custom config file']
+  ensure     => stopped,
+  enable     => true
 }
