@@ -36,5 +36,5 @@ service { 'nginx':
   enable     => true,
   hasrestart => true,
   require    => Package['nginx'],
-  subscribe  => File['Create config file']
+  subscribe  => File['/etc/nginx/sites-available/default']
 }
