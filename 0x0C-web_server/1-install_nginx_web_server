@@ -2,8 +2,9 @@
 # Bash script that configures a new Ubuntu machine with Nginx on it.
 apt-get update
 apt-get install -y nginx
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
 echo "Holberton School" > /var/www/html/index.html
-service nginx start
 echo "#Configuration file for nginx server.
 server {
     listen 80 default_server;
