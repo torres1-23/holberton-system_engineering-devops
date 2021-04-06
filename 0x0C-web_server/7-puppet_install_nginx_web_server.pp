@@ -25,9 +25,8 @@ file { 'Create index.html':
   content => 'Holberton School'
 }
 
-file { 'Create config file':
+file { '/etc/nginx/sites-available/default':
   ensure  => present,
-  path    => '/etc/nginx/sites-available/default',
   content => $string
 }
 
