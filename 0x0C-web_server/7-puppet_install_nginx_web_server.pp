@@ -1,19 +1,20 @@
 # Manifest to configure an Ubuntu server with nginx.
 
-$string = "# Configuration file for nginx server.
-
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    index index.html index.htm;
-    server_name _;
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=dQw4w9WgXcQ;
-    }
+$string = "# Configuration file for nginx server.\
+\
+server {\
+    listen 80 default_server;\
+    listen [::]:80 default_server;\
+    root /var/www/html;\
+    index index.html index.htm;\
+    server_name _;\
+    location /redirect_me {\
+        return 301 https://www.youtube.com/watch?v=dQw4w9WgXcQ;\
+    }\
 }"
 
 package { 'Install nginx':
+  ensure   => present,
   name     => 'nginx',
   provider => 'apt'
 }
