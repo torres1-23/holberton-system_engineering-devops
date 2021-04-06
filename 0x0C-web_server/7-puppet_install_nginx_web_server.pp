@@ -35,5 +35,6 @@ service { 'nginx':
   ensure     => running,
   enable     => true,
   hasrestart => true,
-  require    => Package['nginx']
+  require    => Package['nginx'],
+  subscribe  => File['Create custom config file']
 }
