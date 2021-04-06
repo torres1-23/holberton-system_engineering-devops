@@ -1,34 +1,23 @@
-# Manifest to configure an Ubuntu server with nginx.
+# Script that setup a nginx web server on our server + redirection.
 
-$string = "# Configuration file for nginx server.\
-\
-server {\
-    listen 80 default_server;\
-    listen [::]:80 default_server;\
-    root /var/www/html;\
-    index index.html index.htm;\
-    server_name _;\
-    location /redirect_me {\
-        return 301 https://www.youtube.com/watch?v=dQw4w9WgXcQ;\
-    }\
-}"
-
-package { 'Install nginx':
+package { 'nginx':
   ensure   => present,
-  name     => 'nginx',
   provider => 'apt'
 }
 
-file { 'Create index.html':
+# Index page
+file { '/var/www/html/index.html':
   ensure  => present,
   path    => '/var/www/html/index.html',
   content => 'Holberton School'
 }
 
-file { 'Create config file':
-  ensure  => present,
-  path    => '/etc/nginx/sites-available/default',
-  content => $string
+# Redirect to fabulous Rick Astley page
+file_line { 'Rick Astley showtime':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => '        rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;'
 }
 
 service { 'nginx':
@@ -36,4 +25,5 @@ service { 'nginx':
   enable     => true,
   hasrestart => true,
   require    => Package['nginx'],
+  subscribe  => File_line['Rick Astley showtime']
 }
