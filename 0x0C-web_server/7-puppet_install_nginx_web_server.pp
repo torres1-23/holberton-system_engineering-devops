@@ -1,6 +1,6 @@
 # Manifest to configure an Ubuntu server with nginx.
 
-string = '# Configuration file for nginx server.
+$string = "# Configuration file for nginx server.
 
 server {
     listen 80 default_server;
@@ -11,7 +11,7 @@ server {
     location /redirect_me {
         return 301 https://www.youtube.com/watch?v=dQw4w9WgXcQ;
     }
-}'
+}"
 
 package { 'Install nginx':
   name     => 'nginx',
@@ -31,6 +31,6 @@ file { 'Create custom config file':
 }
 
 exec { 'Restart nginx server':
-    command => 'service nginx restart',
-    path    => '/usr/bin/:/usr/local/bin/:/bin/'
+  command => 'service nginx restart',
+  path    => '/usr/bin/:/usr/local/bin/:/bin/'
 }
