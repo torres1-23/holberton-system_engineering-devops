@@ -14,18 +14,19 @@ server {
 }'
 
 package { 'Install nginx':
-  name     => 'nginx'
+  name     => 'nginx',
+  provider => 'apt'
 }
 
 file { 'Create index.html':
   ensure  => present,
-  path    => /var/www/html/index.html,
+  path    => '/var/www/html/index.html',
   content => 'Holberton School'
 }
 
 file { 'Create custom config file':
   ensure  => present,
-  path    => /etc/nginx/sites-available/default,
+  path    => '/etc/nginx/sites-available/default',
   content => $string
 }
 
