@@ -18,12 +18,10 @@ package { 'nginx':
 }
 
 file { '/var/www/html/index.html':
-  ensure  => present,
   content => 'Holberton School',
 }
 
 file { '/etc/nginx/sites-available/default':
-  ensure  => present,
   content => $string,
 }
 
