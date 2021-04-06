@@ -25,12 +25,6 @@ file { 'Create index.html':
   content => 'Holberton School'
 }
 
-service { 'nginx':
-  ensure  => running,
-  enable  => true,
-  require => Package['nginx']
-}
-
 file { 'Create config file':
   ensure  => present,
   path    => '/etc/nginx/sites-available/default',
