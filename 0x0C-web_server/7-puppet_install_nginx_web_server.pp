@@ -44,7 +44,8 @@ service { 'nginx':
 }
 
 service { 'nginx':
-  ensure  => enabled,
-  enable  => true,
-  require => Package['nginx']
+  ensure     => running,
+  enable     => true,
+  hasrestart => true,
+  require    => Package['nginx'],
 }
