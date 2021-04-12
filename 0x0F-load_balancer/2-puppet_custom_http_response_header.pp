@@ -20,14 +20,14 @@ file_line { 'Custom Header Variable':
 file_line { 'Redirection':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
-  after  => 'add_header X-Served-By $HOSTNAME;',
+  after  => 'listen 80 default_server;',
   line   => '    rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;'
 }
 
 file_line { 'Error page':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
-  after  => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;'
+  after  => 'listen 80 default_server;'
   line   => '    error_page 404 /404.html;'
 }
 
