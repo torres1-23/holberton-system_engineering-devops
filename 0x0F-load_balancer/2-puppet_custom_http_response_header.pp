@@ -19,26 +19,26 @@ file_line { 'Custom Header Variable':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;'
-  line   => '    add_header X-Served-By $HOSTNAME;'
+  line   => '        add_header X-Served-By $HOSTNAME;'
 }
 
 file_line { 'Redirection':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
-  line   => '    rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;'
+  line   => '        rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;'
 }
 
-file_line { 'Error page':
+file_line { 'Error':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;'
-  line   => '    error_page 404 /404.html;'
+  line   => '        error_page 404 /404.html;'
 }
 
 service { 'nginx':
   ensure     => running,
   enable     => true,
   require    => Package['nginx'],
-  subscribe  => File_line['Error page']
+  subscribe  => File_line['Error']
 }
