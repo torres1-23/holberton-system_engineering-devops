@@ -1,20 +1,9 @@
-# Manifest to configure an Ubuntu server with nginx
-
-package { 'nginx':
-  ensure   => present,
-  provider => 'apt'
-}
-
-file_line { 'Custom':
-  ensure => present,
-  path   => '/etc/nginx/sites-available/default',
-  after  => 'listen 80 default_server;',
-  line   => '    add_header X-Served-By \$HOSTNAME;'
-}
-
-service { 'nginx':
-  ensure    => running,
-  enable    => true,
-  require   => Package['nginx'],
-  subscribe => File_line['Custom']
+#!/usr/bin/env bash
+#task advance with pupppet
+exec { 'http header':
+  command  => 'sudo apt-get update -y;
+	sudo apt-get install nginx -y;
+	sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default
+	sudo service nginx restart',
+  provider => shell,
 }
