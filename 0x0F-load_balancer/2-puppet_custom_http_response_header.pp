@@ -5,16 +5,16 @@ package { 'nginx':
   provider => 'apt'
 }
 
-file_line { 'Custom Header Variable':
+file_line { 'Custom':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;'
-  line   => '    add_header X-Served-By $HOSTNAME;'
+  line   => '\tadd_header X-Served-By $HOSTNAME;'
 }
 
 service { 'nginx':
   ensure    => running,
   enable    => true,
   require   => Package['nginx'],
-  subscribe => File_line['Custom Header Variable']
+  subscribe => File_line['Custom']
 }
