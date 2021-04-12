@@ -10,6 +10,11 @@ file { '/var/www/html/index.html':
   content => 'Holberton School'
 }
 
+file { '/var/www/html/404.html':
+  ensure  => present,
+  content => 'Ceci n'est pas une page'
+}
+
 file_line { 'Custom Header Variable':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
@@ -35,5 +40,5 @@ service { 'nginx':
   ensure     => running,
   enable     => true,
   require    => Package['nginx'],
-  subscribe  => File_line['Redirection']
+  subscribe  => File_line['Error page']
 }
