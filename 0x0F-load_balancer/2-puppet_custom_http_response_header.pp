@@ -13,8 +13,8 @@ file_line { 'Custom Header Variable':
 }
 
 service { 'nginx':
-  ensure     => running,
-  enable     => true,
-  require    => Package['nginx'],
-  subscribe  => File_line['Custom Header Variable']
+  ensure    => running,
+  enable    => true,
+  require   => Package['nginx'],
+  subscribe => File_line['Custom Header Variable']
 }
