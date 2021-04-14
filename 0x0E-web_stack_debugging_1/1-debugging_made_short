@@ -2,4 +2,4 @@
 # Script that debugs a web server that was not listening on port 80.
 rm -rf /etc/nginx/sites-enabled/default
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx stop
+service nginx reload
