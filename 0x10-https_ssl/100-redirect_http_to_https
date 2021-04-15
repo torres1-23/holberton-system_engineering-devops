@@ -32,7 +32,7 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend www-http
+frontend lb-http
     bind *:80
     reqadd X-Forwarded-Proto:\ http
     redirect scheme https code 301 if !{ ssl_fc }
