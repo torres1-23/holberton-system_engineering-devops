@@ -14,7 +14,6 @@ import requests
 import sys
 
 if __name__ == "__main__":
-    user_info_str = ""
     user_info_list = []
     id = sys.argv[1]
     url = 'https://jsonplaceholder.typicode.com/users/{}'.format(id)
