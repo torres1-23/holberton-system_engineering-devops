@@ -22,7 +22,6 @@ if __name__ == "__main__":
     user_todos_info = requests.get(url_todo)
     todos_list = user_todos_info.json()
     for dic in todos_list:
-        user_info_str += '"{}","{}","{}","{}"\n'.format(
-            id, user_name, dic['completed'], dic['title'])
+        user_info_str += '"{}","{}","{}","{}"\n'.format(id, user_name, dic['completed'], dic['title'])
     with open("{}.csv".format(id), "w") as file:
         file.write(user_info_str)
