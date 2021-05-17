@@ -20,7 +20,7 @@ def count_words(subreddit, word_list, word_count={}, after=""):
     result = requests.get(url, headers=header, params=param,
                           allow_redirects=False)
     if result.status_code != 200:
-        return None
+        return
     result_data = result.json()["data"]
     after = result_data["after"]
     for child in result_data["children"]:
@@ -42,3 +42,4 @@ def count_words(subreddit, word_list, word_count={}, after=""):
                               key=lambda item: (-item[1], item[0])))
             for key, value in word_count.items():
                 print("{}: {}".format(key, value))
+    return
