@@ -32,7 +32,7 @@ def count_words(subreddit, word_list, word_count={}, after=""):
                     except:
                         count = 0
                     count += title.count(word.lower())
-                    word_count[word.lower()] = count
+                    word_count[word] = count
         if after is not None:
             return count_words(subreddit, word_list, word_count, after)
         if word_count:
@@ -41,10 +41,7 @@ def count_words(subreddit, word_list, word_count={}, after=""):
                                      reverse=True))
             for key, value in word_count_sorted.items():
                 print("{}: {}".format(key, value))
-                return
         else:
             print("")
-            return
     else:
         print("")
-        return
