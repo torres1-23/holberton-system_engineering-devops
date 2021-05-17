@@ -19,29 +19,30 @@ def count_words(subreddit, word_list, word_count={}, after=""):
     }
     result = requests.get(url, headers=header, params=param,
                           allow_redirects=False)
-    if result.status_code == 200:
-        result_data = result.json()["data"]
-        after = result_data["after"]
-        for child in result_data["children"]:
-            child_data = child["data"]
-            title = child_data["title"].lower().split()
-            for word in word_list:
-                if word.lower() in title:
-                    try:
-                        count = word_count[word.lower()]
-                    except:
-                        count = 0
-                    count += title.count(word.lower())
-                    word_count[word.lower()] = count
-        if after is not None:
-            return count_words(subreddit, word_list, word_count, after)
-        if word_count:
-            word_count_sorted = dict(sorted(word_count.items(),
-                                     key=lambda item: (item[1], item[0]),
-                                     reverse=True))
-            for key, value in word_count_sorted.items():
-                print("{}: {}".format(key, value))
-        else:
-            print("")
+    if (response.status_code != 200 or
+        not response.json().get('data').get('children')):
+        print("")
+    result_data = result.json()["data"]
+    after = result_data["after"]
+    for child in result_data["children"]:
+        child_data = child["data"]
+        title = child_data["title"].lower().split()
+        for word in word_list:
+            if word.lower() in title:
+                try:
+                    count = word_count[word.lower()]
+                except:
+                    count = 0
+                count += title.count(word.lower())
+                word_count[word.lower()] = count
+                print(word_count)
+    if after is not None:
+        return count_words(subreddit, word_list, word_count, after)
+    if word_count:
+        word_count_sorted = dict(sorted(word_count.items(),
+                                    key=lambda item: (item[1], item[0]),
+                                    reverse=True))
+        for key, value in word_count_sorted.items():
+            print("{}: {}".format(key, value))
     else:
         print("")
