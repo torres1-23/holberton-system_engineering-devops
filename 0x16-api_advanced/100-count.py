@@ -22,7 +22,7 @@ def count_words(subreddit, word_list, word_count={}, after=""):
     if (result.status_code != 200 or
         not result.json().get('data').get('children')):
         print("")
-        return
+        return None
     result_data = result.json()["data"]
     after = result_data["after"]
     for child in result_data["children"]:
