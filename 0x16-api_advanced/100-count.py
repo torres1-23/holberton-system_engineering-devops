@@ -37,8 +37,11 @@ def count_words(subreddit, word_list, word_count={}, after=""):
     if after is not None:
         count_words(subreddit, word_list, word_count, after)
     else:
-        word_count = dict(sorted(word_count.items(),
-                          key=lambda item: (-item[1], item[0])))
-        for key, value in word_count.items():
-            print("{}: {}".format(key, value))
-        return None
+        if word_count:
+            word_count = dict(sorted(word_count.items(),
+                              key=lambda item: (-item[1], item[0])))
+            for key, value in word_count.items():
+                print("{}: {}".format(key, value))
+            return None
+        else:
+            return None
