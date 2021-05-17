@@ -33,7 +33,6 @@ def count_words(subreddit, word_list, word_count={}, after=""):
                         count = 0
                     count += title.count(word.lower())
                     word_count[word.lower()] = count
-                    print(word_count)
         if after is not None:
             return count_words(subreddit, word_list, word_count, after)
         if word_count:
