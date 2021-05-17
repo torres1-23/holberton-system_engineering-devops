@@ -37,10 +37,11 @@ def count_words(subreddit, word_list, word_count={}, after=""):
             return count_words(subreddit, word_list, word_count, after)
         if word_count:
             word_count_sorted = dict(sorted(word_count.items(),
-                                     key=lambda item: item[1], reverse=True))
+                                     key=lambda item: (item[1], item[0]),
+                                     reverse=True))
             for key, value in word_count_sorted.items():
                 print("{}: {}".format(key, value))
         else:
-            print(None)
+            print("")
     else:
-        print(None)
+        print("")
